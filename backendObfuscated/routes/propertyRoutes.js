@@ -10,15 +10,7 @@ import {
 const router = express.Router();
 
 // Route to get all properties
-router.get("/", async (req, res) => {
-  try {
-    const properties = await getProperties();
-    res.status(200).json(properties);
-  } catch (error) {
-    console.error("Error fetching properties:", error);
-    res.status(500).json({ message: "Internal Server Error in all", error });
-  }
-});
+router.get("/", getProperties);
 
 // Route to get a single property by ID
 router.get("/", getProperties);
