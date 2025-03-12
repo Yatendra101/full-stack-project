@@ -4,10 +4,22 @@ import APIFeatures from "../utils/APIFeatures.js";
 // Get a single property by ID
 export const getProperty = async (req, res) => {
   try {
+    console.log("Fetching property with ID:", req.params.id); // Debug log
+
+    if (!req.params.id) {
+      return res.status(400).json({ status: "fail", message: "Property ID is required" });
+    }
+
     const property = await Property.findById(req.params.id);
+
+    if (!property) {
+      return res.status(404).json({ status: "fail", message: "Property not found" });
+    }
+
     res.status(200).json({ status: "success", data: property });
   } catch (error) {
-    res.status(500).json({ status: "fail", message: error.message });
+    console.error("Error fetching property:", error);
+    res.status(500).json({ status: "fail", message: "Internal Server Error", error: error.message });
   }
 };
 
