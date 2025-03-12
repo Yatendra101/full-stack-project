@@ -21,18 +21,7 @@ router.get("/", async (req, res) => {
 });
 
 // Route to get a single property by ID
-router.get("/:id", async (req, res) => {
-  try {
-    const property = await getProperty(req.params.id);
-    if (!property) {
-      return res.status(404).json({ message: "Property not found" });
-    }
-    res.status(200).json(property);
-  } catch (error) {
-    console.error("Error fetching property:", error);
-    res.status(500).json({ message: "Internal Server Error", error });
-  }
-});
+router.get("/", getProperties);
 
 // Route to create a new property
 router.post("/", async (req, res) => {
