@@ -74,3 +74,22 @@ export const deleteProperty = async (req, res) => {
     res.status(500).json({ status: "fail", message: error.message });
   }
 };
+
+// Update an existing property by ID
+export const updateProperty = async (req, res) => {
+  try {
+    const updatedProperty = await Property.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedProperty) {
+      return res.status(404).json({ status: "fail", message: "Property not found" });
+    }
+
+    res.status(200).json({ status: "success", data: updatedProperty });
+  } catch (error) {
+    res.status(500).json({ status: "fail", message: error.message });
+  }
+};
