@@ -9,28 +9,33 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB
-const DB = process.env.DATABASE_LOCAL || process.env.MONGO_URI;
-console.log("Connecting to MongoDB:", DB);
+// MongoDB Connection
+const DB = process.env.MONGO_URI || process.env.DATABASE_LOCAL;
+console.log("Connecting to MongoDB...");
 
 mongoose
   .connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("DB connection successful"))
-  .catch((err) => console.error("MongoDB Connection Error:", err));
+  .then(() => console.log("✅ MongoDB connected successfully!"))
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
-// Sample route
-app.get("/", (req, res) => {
-  res.send("Backend is running on Vercel!");
+// Handle MongoDB connection errors
+mongoose.connection.on("error", (err) => {
+  console.error("❌ MongoDB Error:", err);
 });
 
-// Import your routes here
+// Sample Route
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running on Vercel!");
+});
+
+// Import and Use Routes
 import propertyRoutes from "./routes/propertyRoutes.js";
 app.use("/api/v1/rent", propertyRoutes);
 
-// Start server
+// Start Server
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-  console.log(`App running on port: ${PORT}`);
+  console.log(`🚀 Server running on port: ${PORT}`);
 });
 
-export default app;
+export default app; // Required for Vercel
