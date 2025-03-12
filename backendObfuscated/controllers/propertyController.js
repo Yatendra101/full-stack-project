@@ -54,7 +54,7 @@ export const getProperties = async (req, res) => {
     });
   } catch (error) {
     console.error("Error searching properties:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error to fetch all" });
   }
 };
 
