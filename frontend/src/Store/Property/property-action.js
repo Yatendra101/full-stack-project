@@ -2,15 +2,16 @@ import axios from "axios";
 
 import { propertyAction } from "./property-slice";
 
-//action creator to fetch properties
+const API_URL = process.env.REACT_APP_API_URL; // Use environment variable for backend URL
 
+//action creator to fetch properties
 export const getAllProperties = () => async (dispatch, getState) => {
   try {
     dispatch(propertyAction.getRequest());
 
     const { searchParams } = getState().properties;
 
-    const response = await axios.get(`/api/v1/rent/listing`, {
+    const response = await axios.get(`${API_URL}/api/v1/rent/listing`, {
       params: { ...searchParams },
     });
 
