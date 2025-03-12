@@ -61,3 +61,16 @@ export const getUsersProperties = async (req, res) => {
     res.status(500).json({ status: "fail", message: error.message });
   }
 };
+
+// Delete a property
+export const deleteProperty = async (req, res) => {
+  try {
+    const deletedProperty = await Property.findByIdAndDelete(req.params.id);
+    if (!deletedProperty) {
+      return res.status(404).json({ status: "fail", message: "Property not found" });
+    }
+    res.status(200).json({ status: "success", message: "Property deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ status: "fail", message: error.message });
+  }
+};
