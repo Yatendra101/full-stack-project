@@ -1,21 +1,21 @@
-const mongoose = require("mongoose");
-const Property = require("./propertyModel");
+import mongoose from 'mongoose';
+import Property from './propertyModel.js';
 
 const bookingSchema = new mongoose.Schema(
   {
     property: {
       type: mongoose.Schema.ObjectId,
-      ref: "Property",
-      required: [true, "Booking must belong to a Property!"],
+      ref: 'Property',
+      required: [true, 'Booking must belong to a Property!'],
     },
     user: {
       type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: [true, "Booking must belong to a User!"],
+      ref: 'User',
+      required: [true, 'Booking must belong to a User!'],
     },
     price: {
       type: Number,
-      required: [true, "Booking must have a price."],
+      required: [true, 'Booking must have a price.'],
     },
     createdAt: {
       type: Date,
@@ -43,13 +43,13 @@ const bookingSchema = new mongoose.Schema(
 
 // Pre-query middleware to populate 'user' and 'property' fields when querying
 bookingSchema.pre(/^find/, function (next) {
-  this.populate("user").populate({
-    path: "property",
-    select: "maximumGuest location images propertyName address",
+  this.populate('user').populate({
+    path: 'property',
+    select: 'maximumGuest location images propertyName address',
   });
   next();
 });
 
-const Booking = mongoose.model("Booking", bookingSchema);
+const Booking = mongoose.model('Booking', bookingSchema);
 
-module.exports = Booking;
+export default Booking;
