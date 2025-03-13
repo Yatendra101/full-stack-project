@@ -43,6 +43,10 @@ app.get("/", (req, res) => {
 import propertyRoutes from "./routes/propertyRoutes.js";
 app.use("/api/v1/rent", propertyRoutes);
 
+// Import your routes
+import userRoutes from "./routes/userRoutes.js";
+app.use("/api/v1/rent", userRoutes);
+
 // Start server
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`🚀 Server running on port: ${PORT}`));
