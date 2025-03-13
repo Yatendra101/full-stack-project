@@ -28,8 +28,6 @@ router.route('/updateMyPassword')
 router.route('/updateMe')
     .patch(authController.protect, authController.updateMe);
 
-router.route('/me')
-    .get(authController.protect, authController.getUserBookings);
 
 // Booking Routes
 router.route('/booking')
