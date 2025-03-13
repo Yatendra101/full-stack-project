@@ -6,11 +6,14 @@ import { promisify } from 'util';
 import sendEmail from '../utils/Email.js';
 import crypto from 'crypto';
 import { cloudinary } from '../utils/Cloudinary.js';
+import { fileURLToPath } from 'url';
 
-// Load environment variables
-dotenv.config({ path: path.join(process.cwd(), '../config.env') });
+// Get the current file path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-
+// Load environment variables from config.env in backendObfuscated/
+dotenv.config({ path: path.join(__dirname, '../../config.env') });
 
 // Function to sign a JWT token
 const signToken = (userId) => {
