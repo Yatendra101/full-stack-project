@@ -185,11 +185,11 @@ exports.updatePassword = async (req, res, next) => {
         user.password = req.body.password;
         user.passwordConfirm = req.body.passwordConfirm;
         await user.save();
-        
-export { signup, login, logout, protect, updateMe, updatePassword };
 
         createSendToken(user, 200, res);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
 };
+
+export { signup, login, logout, protect, updateMe, updatePassword };
