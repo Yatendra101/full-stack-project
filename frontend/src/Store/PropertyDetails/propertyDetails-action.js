@@ -2,11 +2,14 @@ import axios from "axios";
 
 import { propertyDetailsAction } from "./propertyDetails-slice";
 
+const API_URL = process.env.REACT_APP_API_URL; // Use environment variable for backend URL
+
+
 export const getPropertyDetails = (id) => async (dispatch) => {
   try {
     dispatch(propertyDetailsAction.getListRequest());
 
-    const response = await axios(`/api/v1/rent/listing/${id}`);
+    const response = await axios.get(`${API_URL}/${id}`);
 
     if (!response) {
       throw new Error("Could not fetch any property details");

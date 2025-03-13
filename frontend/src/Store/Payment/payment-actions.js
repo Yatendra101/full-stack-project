@@ -3,6 +3,8 @@ import { CardNumberElement } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { createBooking } from "../../Store/Booking/booking-action";
 
+const API_URL = process.env.REACT_APP_API_URL; // Use environment variable for backend URL
+
 export const processPayment = ({
   totalAmount,
   stripe,
@@ -27,7 +29,7 @@ export const processPayment = ({
     const cardNumberElement = elements.getElement(CardNumberElement);
     try {
       const response = await axios.post(
-        "/api/v1/rent/user/checkout-session",
+        `${API_URL}/user/checkout-session`,
         {
           amount: totalAmount,
           currency: "inr",
@@ -77,7 +79,7 @@ export const processPayment = ({
           nights,
         })
       );
-      navigate("/user/booking");
+      navigate(`${API_URL}/user/booking`);
     } catch (error) {
       console.error("Error processing payment:", error);
     }
