@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 // Route to get all properties
-router.get("/", getProperties);
+router.get("/listing", getProperties);
 
 // Route to get a single property by ID
 router.get("/:id", getProperty);
