@@ -39,7 +39,7 @@ router.route('/me')
 
 // Booking Routes
 router.route('/booking')
-    .get(authController.protect, bookingController.getcheckOutSession);
+    .get(authController.protect, bookingController.getCheckOutSession);
 
 router.route('/booking/:bookingId')
     .patch(authController.protect, bookingController.getBookingDetails);
