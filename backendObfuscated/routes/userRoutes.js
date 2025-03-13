@@ -50,4 +50,4 @@ router.route('/booking/new')
 router.route('/checkout-session')
     .get(authController.protect, bookingController.getcheckOutSession);
 
-module.exports = router;
+export default router;
