@@ -52,7 +52,7 @@ const filterObj = (obj, ...allowedFields) => {
 const defaultAvatarUrl = 'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg';
 
 // Signup function
-exports.signup = async (req, res) => {
+export const signup = async (req, res) => {
     try {
         const newUser = await User.create({
             name: req.body.name,
@@ -72,7 +72,7 @@ exports.signup = async (req, res) => {
 };
 
 // Login function
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
@@ -92,7 +92,7 @@ exports.login = async (req, res) => {
 };
 
 // Logout function
-exports.logout = (req, res) => {
+export const logout = (req, res) => {
     res.cookie('jwt', 'loggedout', {
         expires: new Date(Date.now() + 10 * 1000),
         httpOnly: true
@@ -102,7 +102,7 @@ exports.logout = (req, res) => {
 };
 
 // Middleware to protect routes (JWT authentication)
-exports.protect = async (req, res, next) => {
+export const protect = async (req, res, next) => {
     try {
         let token;
 
@@ -138,7 +138,7 @@ exports.protect = async (req, res, next) => {
 };
 
 // Update user profile
-exports.updateMe = async (req, res, next) => {
+export const updateMe = async (req, res, next) => {
     try {
         const filteredBody = filterObj(req.body, 'name', 'phoneNumber', 'avatar');
 
@@ -174,7 +174,7 @@ exports.updateMe = async (req, res, next) => {
 };
 
 // Update user password
-exports.updatePassword = async (req, res, next) => {
+export const updatePassword = async (req, res, next) => {
     try {
         const user = await User.findById(req.user.id).select('+password');
 
@@ -192,4 +192,3 @@ exports.updatePassword = async (req, res, next) => {
     }
 };
 
-export { signup, login, logout, protect, updateMe, updatePassword };
