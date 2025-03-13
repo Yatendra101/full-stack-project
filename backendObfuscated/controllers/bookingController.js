@@ -1,12 +1,17 @@
-const path = require('path');
-const dotenv = require('dotenv').config({ path: path.join(__dirname, '../config.env') });
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const Property = require('../Models/propertyModel');
-const Booking = require('../Models/bookingModel');
-const moment = require('moment');
+import path from 'path';
+import dotenv from 'dotenv';
+import Stripe from 'stripe';
+import Property from '../Models/propertyModel.js';
+import Booking from '../Models/bookingModel.js';
+import moment from 'moment';
+
+// Load environment variables
+dotenv.config({ path: path.join(process.cwd(), '../config.env') });
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Create Stripe Payment Intent
-exports.getCheckOutSession = async (req, res) => {
+export const getCheckOutSession = async (req, res) => {
     try {
         const { amount, currency, paymentMethodTypes, propertyName } = req.body;
 
@@ -26,7 +31,7 @@ exports.getCheckOutSession = async (req, res) => {
 };
 
 // Create a new Booking
-exports.createBookings = async (req, res) => {
+export const createBookings = async (req, res) => {
     try {
         if (!req.user) throw new Error('Please login First');
 
@@ -96,7 +101,7 @@ exports.createBookings = async (req, res) => {
 };
 
 // Get Bookings for a User
-exports.getUserBookings = async (req, res) => {
+export const getUserBookings = async (req, res) => {
     try {
         const bookings = await Booking.find({ user: req.user._id });
 
@@ -113,7 +118,7 @@ exports.getUserBookings = async (req, res) => {
 };
 
 // Get Booking Details by ID
-exports.getBookingDetails = async (req, res) => {
+export const getBookingDetails = async (req, res) => {
     try {
         const booking = await Booking.findById(req.params.bookingId);
 
