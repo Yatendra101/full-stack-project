@@ -51,5 +51,4 @@ app.use("/api/v1/rent/users", userRoutes);
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`🚀 Server running on port: ${PORT}`));
 
-// Vercel requires module export
-export default app;
+
