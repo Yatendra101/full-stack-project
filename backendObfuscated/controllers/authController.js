@@ -1,11 +1,16 @@
-const User = require('../Models/userModel');
-const jwt = require('jsonwebtoken');
-const path = require('path');
-const dotenv = require('dotenv').config({ path: path.join(__dirname, '../config.env') });
-const { promisify } = require('util');
-const sendEmail = require('../utils/Email');
-const crypto = require('crypto');
-const cloudinary = require('../utils/Cloudinary');
+import User from '../Models/userModel.js';
+import jwt from 'jsonwebtoken';
+import path from 'path';
+import dotenv from 'dotenv';
+import { promisify } from 'util';
+import sendEmail from '../utils/Email.js';
+import crypto from 'crypto';
+import cloudinary from '../utils/Cloudinary.js';
+
+// Load environment variables
+dotenv.config({ path: path.join(process.cwd(), '../config.env') });
+
+
 
 // Function to sign a JWT token
 const signToken = (userId) => {
@@ -180,6 +185,8 @@ exports.updatePassword = async (req, res, next) => {
         user.password = req.body.password;
         user.passwordConfirm = req.body.passwordConfirm;
         await user.save();
+        
+export { signup, login, logout, protect, updateMe, updatePassword };
 
         createSendToken(user, 200, res);
     } catch (err) {
