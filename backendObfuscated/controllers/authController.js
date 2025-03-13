@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import { promisify } from 'util';
 import sendEmail from '../utils/Email.js';
 import crypto from 'crypto';
-import cloudinary from '../utils/Cloudinary.js';
+import { cloudinary } from '../utils/Cloudinary.js';
 
 // Load environment variables
 dotenv.config({ path: path.join(process.cwd(), '../config.env') });
