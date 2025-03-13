@@ -7,7 +7,7 @@ import { getLogIn } from "../../Store/User/user-action";
 import { userActions } from "../../Store/User/user-slice";
 import LoadingSpinner from "../LoadingSpinner";
 
-const Login = () => {
+export const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -76,5 +76,3 @@ const Login = () => {
     </Fragment>
   );
 };
-
-export default Login;
