@@ -13,7 +13,7 @@ const router = express.Router();
 router.get("/", getProperties);
 
 // Route to get a single property by ID
-router.get("/", getProperties);
+router.get("/:id", getProperty);
 
 // Route to create a new property
 router.post("/", async (req, res) => {
