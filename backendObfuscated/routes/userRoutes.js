@@ -1,7 +1,7 @@
-const express = require('express');
-const authController = require('../controllers/authController');
-const bookingController = require('../controllers/bookingController');
-const propertyController = require('../controllers/propertyController');
+import express from 'express';
+import * as authController from '../controllers/authController.js';
+import * as bookingController from '../controllers/bookingController.js';
+import * as propertyController from '../controllers/propertyController.js';
 
 const router = express.Router();
 
