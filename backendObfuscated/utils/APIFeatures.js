@@ -66,7 +66,7 @@ class APIFeatures {
   // Pagination logic
   paginate() {
     let page = this.queryString.page * 1 || 1;
-    let limit = this.queryString.limit * 1 || 10;
+    let limit = this.queryString.limit * 1 || 12;
     let skip = (page - 1) * limit;
 
     this.query = this.query.skip(skip).limit(limit);
