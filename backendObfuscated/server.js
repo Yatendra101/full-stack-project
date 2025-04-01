@@ -45,7 +45,7 @@ app.use("/api/v1/rent", propertyRoutes);
 
 // Import your routes
 import userRoutes from "./routes/userRoutes.js";
-app.use("/api/v1/rent/users", userRoutes);
+app.use("/api/v1/rent/user", userRoutes);
 
 // Start server
 const PORT = process.env.PORT || 8000;
